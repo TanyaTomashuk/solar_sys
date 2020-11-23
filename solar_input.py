@@ -1,8 +1,23 @@
 # coding: utf-8
 # license: GPLv3
+import os
 
 from solar_objects import Star, Planet
 from solar_vis import DrawableObject
+
+def choose_path(simulations_path):
+    """
+    Считывает название файла
+    """
+    pathes = [os.path.join(simulations_path, file) for file in os.listdir(simulations_path)]
+
+    for number, file in enumerate(pathes):
+        print(f'{number}: {file}')
+
+    while True:
+            path = pathes[int(input('enter number file: '))]
+            break
+    return path
 
 def read_space_objects_data_from_file(input_filename):
     """Cчитывает данные о космических объектах из файла, создаёт сами объекты
@@ -53,7 +68,15 @@ def parse_star_parameters(line, star):
 
     **star** — объект звезды.
     """
-    pass  # FIXME: допишите парсер
+    _, radius, color, mass, x, y, Vx, Vy = line.strip().split()
+
+    star.R = float(radius)
+    star.color = str(color).lower()
+    star.m = float(mass)
+    star.x = float(x)
+    star.y = float(y)
+    star.Vx = float(Vx)
+    star.Vy = float(Vy)
 
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
@@ -73,27 +96,7 @@ def parse_planet_parameters(line, planet):
 
     **planet** — объект планеты.
     """
-    pass  # FIXME: допишите парсер
-
-def write_space_objects_data_to_file(output_filename, space_objects):
-    """Сохраняет данные о космических объектах в файл.
-
-    Строки должны иметь следующий формат:
-
-    Star <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
-
-    Planet <радиус в пикселах> <цвет> <масса> <x> <y> <Vx> <Vy>
-
-    Параметры:
-
-    **output_filename** — имя входного файла
-
-    **space_objects** — список объектов планет и звёзд
-    """
-    with open(output_filename, 'w') as out_file:
-        for obj in space_objects:
-            print(out_file, "%s %d %s %f" % ('1', 2, '3', 4.5))
-            # FIXME!
+    parse_star_parameters(line, planet)
 
 
 if __name__ == "__main__":

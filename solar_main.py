@@ -10,6 +10,7 @@ import thorpy
 import time
 import numpy as np
 
+
 class Container:
     def __init__(self):
         self.model_time = 0
@@ -31,9 +32,13 @@ class Container:
         self.space_objects = []
         """Список космических объектов."""
         self.timer = None
+        self.path = 'initial_system'
+        self.file =''
+        """Путь до файла с симуляцией"""
 
 
 c = Container()
+
 
 def execution(delta):
     """
@@ -44,6 +49,7 @@ def execution(delta):
     """
     recalculate_space_objects_positions([dr.obj for dr in c.space_objects], delta)
     c.model_time += delta
+
 
 def start_execution():
     """Обработчик события нажатия на кнопку Start.
@@ -69,7 +75,7 @@ def open_file():
     Считанные объекты сохраняются в глобальный список c.space_objects
     """
     c.model_time = 0.0
-    in_filename = "solar_system.txt"
+    in_filename = c.file
     c.space_objects = read_space_objects_data_from_file(in_filename)
     max_distance = max([max(abs(obj.obj.x), abs(obj.obj.y)) for obj in c.space_objects])
     calculate_scale_factor(max_distance)
@@ -129,6 +135,7 @@ def main():
     Создаёт объекты графического дизайна библиотеки tkinter: окно, холст, фрейм с кнопками, кнопки.
     """
     print('Modelling started!')
+    c.file = choose_path(c.path)
     c.physical_time = 0
 
     pg.init()
