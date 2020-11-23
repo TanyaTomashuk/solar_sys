@@ -62,5 +62,6 @@ def recalculate_space_objects_positions(space_objects, dt):
         move_space_object(body, dt)
 
 
+
 if __name__ == "__main__":
     print("This module is not for direct call!")
