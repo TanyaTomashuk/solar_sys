@@ -5,6 +5,7 @@ import os
 from solar_objects import Star, Planet
 from solar_vis import DrawableObject
 
+
 def choose_path(simulations_path):
     """
     Считывает название файла
@@ -15,9 +16,10 @@ def choose_path(simulations_path):
         print(f'{number}: {file}')
 
     while True:
-            path = pathes[int(input('enter number file: '))]
-            break
+        path = pathes[int(input('enter number file: '))]
+        break
     return path
+
 
 def read_space_objects_data_from_file(input_filename):
     """Cчитывает данные о космических объектах из файла, создаёт сами объекты
@@ -77,6 +79,7 @@ def parse_star_parameters(line, star):
     star.y = float(y)
     star.Vx = float(Vx)
     star.Vy = float(Vy)
+
 
 def parse_planet_parameters(line, planet):
     """Считывает данные о планете из строки.
