@@ -33,7 +33,7 @@ class Container:
         """Список космических объектов."""
         self.timer = None
         self.path = 'initial_system'
-        self.file =''
+        self.file = ''
         """Путь до файла с симуляцией"""
 
 
